@@ -69,7 +69,7 @@ Matrix Matrix::Transpose() const
 {
     if (GetHeight())
     {
-        Matrix res(GetHeight(), GetWidth());
+        Matrix res(GetWidth(), GetHeight());
         for (size_t x = 0; x < res.GetWidth(); x++)
         {
             for (size_t y = 0; y < res.GetHeight(); y++)

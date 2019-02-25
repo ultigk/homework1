@@ -55,6 +55,8 @@ int main()
     std::cout << "Input matrix1 elements" << std::endl;
     std::cin >> matrix1;
 
+    //std::cout << matrix1.Transpose() << std::endl;
+
     std::cout << "Input matrix_height_2 and matrix_width_2: " << std::endl;
     std::cin >> matrix_height >> matrix_width;
     Matrix matrix2(matrix_height, matrix_width);
@@ -63,7 +65,7 @@ int main()
 
     Matrix res = matrix1 * matrix2;
     std::cout << "Matrix1 * matrix2 = " << std::endl;
-    std::cout << res << std::endl;
+    std::cout << res << std::endl;*/
 
     return 0;
 }
