@@ -76,7 +76,6 @@ Matrix Matrix::Transpose() const
         }
     }
     return res;
-    return Matrix(0, 0); 
 }
 
 
