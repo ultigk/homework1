@@ -1,4 +1,4 @@
-#include "matrix.h"
+ï»¿#include "matrix.h"
 
 std::istream& operator >> (std::istream& input_stream, Matrix& matrix)
 {
@@ -20,9 +20,9 @@ std::ostream& operator << (std::ostream& output_stream, const Matrix& matrix)
     {
         for (size_t x = 0; x < matrix.GetWidth(); x++)
         {
-            output_stream << matrix.GetValue(y, x) << std::endl;
-            //matrix.SetValue(y, x, temp_int);
+            output_stream << matrix.GetValue(y, x) << " ";
         }
+        std::cout << std::endl;
     }
     return output_stream;
 }
@@ -34,7 +34,7 @@ Matrix::Matrix(const size_t height, const size_t width)
         std::vector<int> temp_vec;
         for (size_t x = 0; x < width; x++)
         {
-            temp_vec.push_back(0);  // âñå ýëåìåíòû ìàòðèöû áóäóò ðàâíû íóëþ
+            temp_vec.push_back(0);  // Ð²ÑÐµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ Ð¼Ð°Ñ‚Ñ€Ð¸Ñ†Ñ‹ Ð±ÑƒÐ´ÑƒÑ‚ Ñ€Ð°Ð²Ð½Ñ‹ Ð½ÑƒÐ»ÑŽ
         }
         data_.push_back(temp_vec);
     }
@@ -56,8 +56,7 @@ size_t Matrix::GetWidth() const
 
 int Matrix::GetValue(const size_t height_index, const size_t width_index) const
 {
-    int value_ = data_[height_index][width_index];
-    return value_;
+    return data_[height_index][width_index];
 }
 
 void Matrix::SetValue(const size_t height_index, const size_t width_index,
@@ -68,8 +67,7 @@ void Matrix::SetValue(const size_t height_index, const size_t width_index,
 
 Matrix Matrix::Transpose() const
 {
-    //Matrix res[matrica[0].size()][matrix.size()];
-    Matrix res(data_[0].size() /*height*/, data_.size() /*width*/);
+    Matrix res(GetHeight(), GetWidth());
     for (size_t x = 0; x < res.GetWidth(); x++)
     {
         for (size_t y = 0; y < res.GetHeight(); y++)
@@ -78,34 +76,30 @@ Matrix Matrix::Transpose() const
         }
         return res;
     }
-    return Matrix(0, 0); // ñîçäàåì íóëåâóþ, ÷òîáû ÷òî-òî âåðíóòü
+    return Matrix(0, 0); // ÑÐ¾Ð·Ð´Ð°ÐµÐ¼ Ð½ÑƒÐ»ÐµÐ²ÑƒÑŽ, Ñ‡Ñ‚Ð¾Ð±Ñ‹ Ñ‡Ñ‚Ð¾-Ñ‚Ð¾ Ð²ÐµÑ€Ð½ÑƒÑ‚ÑŒ
 }
 
 
 
 Matrix Matrix::operator * (const Matrix& rhs)
 {
-    /*if (data_[0].size != rhs.GetHeight())
+    if (GetWidth() != rhs.GetHeight())
     {
-        std::cout << "Óìíîæåíèå íåâîçìîæíî! " << std::endl;
+        std::cout << "Ð£Ð¼Ð½Ð¾Ð¶ÐµÐ½Ð¸Ðµ Ð½ÐµÐ²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾! " << std::endl;
         Matrix res(0, 0);
         return res;
-    }*/
-    Matrix res(data_.size(), rhs.GetWidth());
+    }
+    Matrix res(GetHeight(), rhs.GetWidth());
 
     int temp = 0;
-    //Matrix3 = new size_t*[Matrix1.GetHeight()];
-    for (size_t y = 0; y < data_.size(); y++)
+    for (size_t y = 0; y < GetHeight(); y++)
     {
-        //Matrix3[i] = new size_t[Matrix2.GetWidth()];
         for (size_t x = 0; x < rhs.GetWidth(); x++)
         {
-            //Matrix3[i][j] = 0;
-            for (size_t z = 0; z < data_[0].size(); z++)
+            for (size_t z = 0; z < GetWidth(); z++)
             {
                 temp += data_[y][z] * rhs.GetValue(x, z);
             }
-            //res[y][x] = temp;
             res.SetValue(y, x, temp);
             temp = 0;
         }
