@@ -65,7 +65,7 @@ int main()
 
     Matrix res = matrix1 * matrix2;
     std::cout << "Matrix1 * matrix2 = " << std::endl;
-    std::cout << res << std::endl;*/
+    std::cout << res << std::endl;
 
     return 0;
 }

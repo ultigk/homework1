@@ -67,18 +67,15 @@ void Matrix::SetValue(const size_t height_index, const size_t width_index,
 
 Matrix Matrix::Transpose() const
 {
-    if (GetHeight())
+    Matrix res(GetWidth(), GetHeight());
+    for (size_t x = 0; x < res.GetWidth(); x++)
     {
-        Matrix res(GetWidth(), GetHeight());
-        for (size_t x = 0; x < res.GetWidth(); x++)
+        for (size_t y = 0; y < res.GetHeight(); y++)
         {
-            for (size_t y = 0; y < res.GetHeight(); y++)
-            {
-                res.SetValue(y, x, data_[x][y]);
-            }
+            res.SetValue(y, x, data_[x][y]);
         }
-        return res;
     }
+    return res;
     return Matrix(0, 0); 
 }
 
