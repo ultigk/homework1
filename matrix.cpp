@@ -67,16 +67,19 @@ void Matrix::SetValue(const size_t height_index, const size_t width_index,
 
 Matrix Matrix::Transpose() const
 {
-    Matrix res(GetHeight(), GetWidth());
-    for (size_t x = 0; x < res.GetWidth(); x++)
+    if (GetHeight())
     {
-        for (size_t y = 0; y < res.GetHeight(); y++)
+        Matrix res(GetHeight(), GetWidth());
+        for (size_t x = 0; x < res.GetWidth(); x++)
         {
-            res.SetValue(y, x, data_[x][y]);
+            for (size_t y = 0; y < res.GetHeight(); y++)
+            {
+                res.SetValue(y, x, data_[x][y]);
+            }
         }
         return res;
     }
-    return Matrix(0, 0); // создаем нулевую, чтобы что-то вернуть
+    return Matrix(0, 0); 
 }
 
 
